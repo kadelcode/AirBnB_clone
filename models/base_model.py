@@ -42,3 +42,8 @@ class BaseModel:
         rdict["updated_at"] = self.updated_at.isoformat()
         rdict["__class__"] = self.__class__.__name__
         return dict
+
+    def __str__(self):
+        """Return the str representation of the BaseModel instance."""
+        clsname = self.__class__.__name__
+        return "[{}] ({}) {}".format(clsname, self.id, self.__dict__)
