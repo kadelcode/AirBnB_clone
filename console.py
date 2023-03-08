@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 """  An HBNBcommmand interpreter """
 import cmd
+import re
+from models import storage
+from shlex import split
+from models.base_model import BaseModel
 
 
 def parse(arg):
@@ -32,6 +36,17 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, arg):
         'Exits the program'
         return True
+
+    def do_create(self, arg):
+        """ Creates a new class instance and print its id """
+        arg1 = parse(arg)
+        if len(arg1) == 0:
+            print("** class name missing **")
+        elif arg1[0] not in HBNBCommand.__classes:
+            print("** class doesn't exist **")
+        else:
+            print(eval(arg1[0])().id)
+            storage.save()
 
 
 if __name__ == '__main__':
