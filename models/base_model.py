@@ -29,14 +29,14 @@ class BaseModel:
         else:
             models.storage.new(self)
 
-
     def save(self):
         """ updates `updated_at` with the current datetime """
         self.updated_at = datetime.today()
         models.storage.save()
 
     def to_dict(self):
-        """ returns a dictionary containing all keys/values of __dict__ of the instance """
+        """ returns a dictionary containing all keys/values
+            of __dict__ of the instance """
         rdict = self.__dict__.copy()
         rdict["created_at"] = self.created_at.isoformat()
         rdict["updated_at"] = self.updated_at.isoformat()
