@@ -3,6 +3,8 @@
 import json
 from models.base_model import BaseModel
 from models.user import User
+
+
 class FileStorage:
     """ Represent an abstracted storage engine
 
@@ -30,7 +32,8 @@ class FileStorage:
             json.dump(objdict, f)
 
     def reload(self):
-        """ Deserialize the JSON file __file_path to __objects, if it exists. """
+        """ Deserialize the JSON file __file_path
+            to __objects, if it exists. """
         try:
             with open(FileStorage.__file_path) as f:
                 objdict = json.load(f)
