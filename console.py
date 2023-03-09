@@ -29,6 +29,10 @@ class HBNBCommand(cmd.Cmd):
     """ A command line interpreter """
     prompt = ' (hbnb) '
 
+    def emptyline(self):
+        """Print nothing when the empty line is entered"""
+        pass
+
     def do_quit(self, arg):
         'Quit command to exit the program'
         return True
