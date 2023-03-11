@@ -34,6 +34,15 @@ def parse(arg):
 class HBNBCommand(cmd.Cmd):
     """ A command line interpreter """
     prompt = ' (hbnb) '
+    __classes = {
+        "BaseModel",
+        "User",
+        "State",
+        "City",
+        "Place",
+        "Amenity",
+        "Review"
+    }
 
     def emptyline(self):
         """Print nothing when the empty line is entered"""
