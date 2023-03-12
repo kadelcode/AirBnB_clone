@@ -1,14 +1,14 @@
 #!/usr/bin/python3
-"""  An HBNBcommmand interpreter """
+"""Defines the HBnB console."""
 import cmd
 import re
-from models import storage
 from shlex import split
+from models import storage
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
-from models.place import Place
 from models.city import City
+from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
@@ -32,8 +32,12 @@ def parse(arg):
 
 
 class HBNBCommand(cmd.Cmd):
-    """ A command line interpreter """
-    prompt = ' (hbnb) '
+    """Defines the HolbertonBnB command interpreter.
+    Attributes:
+        prompt (str): The command prompt.
+    """
+
+    prompt = "(hbnb) "
     __classes = {
         "BaseModel",
         "User",
@@ -45,7 +49,7 @@ class HBNBCommand(cmd.Cmd):
     }
 
     def emptyline(self):
-        """Print nothing when the empty line is entered"""
+        """Do nothing upon receiving an empty line."""
         pass
 
     def default(self, arg):
@@ -70,22 +74,25 @@ class HBNBCommand(cmd.Cmd):
         return False
 
     def do_quit(self, arg):
-        'Quit command to exit the program'
+        """Quit command to exit the program."""
         return True
 
     def do_EOF(self, arg):
-        'Exits the program'
+        """EOF signal to exit the program."""
+        print("")
         return True
 
     def do_create(self, arg):
-        """ Creates a new class instance and print its id """
-        arg1 = parse(arg)
-        if len(arg1) == 0:
+        """Usage: create <class>
+        Create a new class instance and print its id.
+        """
+        argl = parse(arg)
+        if len(argl) == 0:
             print("** class name missing **")
-        elif arg1[0] not in HBNBCommand.__classes:
+        elif argl[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
-            print(eval(arg1[0])().id)
+            print(eval(argl[0])().id)
             storage.save()
 
     def do_show(self, arg):
@@ -198,5 +205,5 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     HBNBCommand().cmdloop()
